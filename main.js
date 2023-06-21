@@ -42,6 +42,6 @@ let songs = [
 
 function loadTrack(songIndex){
     clearInterval(updateTimer);
-
+    
 }
 

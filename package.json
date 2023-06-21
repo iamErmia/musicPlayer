@@ -1,0 +1,8 @@
+{
+  "type": "commonjs",
+  "dependencies": {
+    "express": "^4.18.2",
+    "glob": "^10.2.7",
+    "music-metadata": "^8.1.4"
+  }
+}

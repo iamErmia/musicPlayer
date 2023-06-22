@@ -47,7 +47,7 @@ function loadTrack(songIndex){
     clearInterval(updateTimer);
     
 }
-
+var track_library = [];
 
 function getMusics() {
     fetch('http://localhost:3000/songs').then((res) => res.json()).then((allMusics) => {
@@ -59,8 +59,19 @@ function getMusics() {
             div.appendChild(document.createTextNode(value.title));
             parent.appendChild(div);
             musicLibrary.appendChild(parent);
+            track_library.push(value.title);//adding tracks to an array
         }
     })
 }
 
 getMusics();
+
+var upcomiSongs = [];//a que for saving the upcomig songs
+var front = 0;//the first elemnt of the afformentioned que
+var rear = 0;//the last element of the afformentioned que
+
+function firstAddToQue(){
+    upcomiSongs = upcomiSongs.concat(track_library);//adding the loaded songs to the que
+    rear = (track_library.length) - 1;
+}
+

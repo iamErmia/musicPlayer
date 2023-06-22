@@ -53,7 +53,9 @@ function loadTrack(songIndex){                     //make sure you find the best
     track_artist.textContent = upcomiSongs[songIndex].artist;
     track_art = upcomiSongs[songIndex].cover;
 
-    updateTimer = setInterval(seekUpdate, 1000);          
+    updateTimer = setInterval(seekUpdate, 1000);
+
+    curr_music.addEventListener("ended", addToRecent);      //declare this function
     curr_music.addEventListener("ended", nextTrack);      //declare this function
 }
 
@@ -83,6 +85,37 @@ function seekUpdate(){
         curr_time.textContent = currentMin + ":" + currentSec;
         total_duration.textContent = totalMin + ":" + totalSec;
     }
+}
+
+function nextTrack(){
+    if(songIndex != rear)
+        songIndex = songIndex + 1;
+    else
+        songIndex = 0;
+    loadTrack(songIndex);
+    playTrack();
+}
+
+function prevTrack(){
+    if(songIndex == 0)
+        songIndex = rear;
+    else
+        songIndex = songIndex - 1;
+        
+    loadTrack(songIndex);
+    playTrack();
+}
+
+function playTrack(){
+    curr_music.play();
+    isPlaying = true;
+    playpause_btn.innerHTML = '<i class="fa fa-pause-circle fa-5x"></i>';
+}
+
+function pauseTrack(){
+    curr_music.pause();
+    isPlaying = false;
+    playpause_btn.innerHTML = '<i class="fa fa-play-circle fa-5x"></i>';
 }
 let track_library = [];
 
@@ -115,5 +148,7 @@ function firstAddToQue(){
 (() =>{
     getMusics();//loading files
     firstAddToQue();
-    let indxOfSong = findIndex();              //declare this function
+    let indxOfSong = findIndex();              //declare this function   **if required at all**
+    next_btn.addEventListener("click", nextTrack);
+    prev_btn.addEventListener("click",)
 })();

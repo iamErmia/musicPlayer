@@ -4,6 +4,7 @@ let track_art = document.querySelector(".track-art");
 let track_name = document.querySelector(".track-name");
 let track_artist = document.querySelector(".track-artist");
 let musicLibrary = document.querySelector(".vertical-menu");
+let recentlyPlayed = document.querySelector(".recentlyPlayed");
 
  
 let playpause_btn = document.querySelector(".playpause-track");
@@ -87,8 +88,17 @@ function seekUpdate(){
     }
 }
 
+let recent = [];
+function addToRecent(){
+    recent.push(curr_music.title);
+    const div = document.createElement('div');
+    div.className = 'recentlyPlayed-div';
+    div.appendChild(document.createTextNode(curr_music.title));
+    recentlyPlayed.appendChild(div);
+}
+
 function nextTrack(){
-    if(songIndex != rear)
+    if(songIndex != rear - 1)
         songIndex = songIndex + 1;
     else
         songIndex = 0;
@@ -98,7 +108,7 @@ function nextTrack(){
 
 function prevTrack(){
     if(songIndex == 0)
-        songIndex = rear;
+        songIndex = rear - 1;
     else
         songIndex = songIndex - 1;
         
@@ -142,7 +152,7 @@ let rear = 0;//the last element of the afformentioned que
 
 function firstAddToQue(){
     upcomiSongs = upcomiSongs.concat(track_library);//adding the loaded songs to the que
-    rear = (track_library.length) - 1;
+    rear = (track_library.length);
 }
 
 (() =>{

@@ -10,23 +10,39 @@ align items in a vertical direction */
 
 .vertical-menu {
 	width: 200px;
+	display: flex;
+	flex-direction: column;
 }
   
-.vertical-menu a {
+.vertical-menu-div {
+	height: 3vh;
 	background-color: #f2f2f2;
 	color: black;
-	display: block;
+	flex: 3;
 	padding: 12px;
 	text-decoration: none;
+}
+
+.vertical-menu div {
+	display: flex;
+	image-resolution: 12px;
+	
+}
+
+.vertical-menu-div img {
+	flex: 1;
+	object-fit: contain;
+	height: 100%;
 }
   
 .vertical-menu a:hover {
 	background-color: #ccc;
 }
   
-.vertical-menu a.active {
+.active {
 	background-color: #04AA6D;
 	color: white;
+	padding: 12px;
 }
 
 .vertical-menu {
@@ -39,7 +55,7 @@ align items in a vertical direction */
 	width: 200px;
 }
 
-.playlist b {
+.playlist a {
 	background-color: #f2f2f2;
 	color: black;
 	display: block;
@@ -48,11 +64,11 @@ align items in a vertical direction */
 	font-weight: normal;
 }
 
-.playlist b:hover {
+.playlist a:hover {
 	background-color: #ccc;
 }
 
-.playlist b.active {
+.playlist a.active {
 	background-color: #04AA6D;
 	color: white;
 }
@@ -67,7 +83,7 @@ align items in a vertical direction */
 	width: 200px;
 }
 
-.nextSongs c {
+.nextSongs a {
 	background-color: #f2f2f2;
 	color: black;
 	display: block;
@@ -76,11 +92,11 @@ align items in a vertical direction */
 	font-weight: normal;
 }
 
-.nextSongs c:hover {
+.nextSongs a:hover {
 	background-color: #ccc;
 }
 
-.nextSongs c.active {
+.nextSongs a.active {
 	background-color: #04AA6D;
 	color: white;
 }
@@ -95,7 +111,7 @@ align items in a vertical direction */
 	width: 200px;
 }
 
-.recentlyPlayed d {
+.recentlyPlayed a {
 	background-color: #f2f2f2;
 	color: black;
 	display: block;
@@ -104,11 +120,11 @@ align items in a vertical direction */
 	font-weight: normal;
 }
 
-.recentlyPlayed d:hover{
+.recentlyPlayed a:hover{
 	background-color: #ccc;
 }
 
-.recentlyPlayed d.active{
+.recentlyPlayed a.active{
 	background-color: #04AA6D;
 	color: white;
 }
@@ -116,7 +132,7 @@ align items in a vertical direction */
 .recentlyPlayed {
 	position: absolute;
 	left: 270px;
-	top: 200px;
+	top: 300px;
 }
 
 .search input[type=text]{

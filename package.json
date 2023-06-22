@@ -1,5 +1,5 @@
 {
-  "type": "commonjs",
+  "type": "module",
   "dependencies": {
     "express": "^4.18.2",
     "glob": "^10.2.7",

@@ -11,7 +11,7 @@ async function parseFiles(files) {
         const imagePath = pathToFileURL(
             `${
                 path.parse(path.parse(path.parse(`${fileURLToPath(import.meta.url)}`).dir).dir).dir
-            }\\covers\\${data.common.title}.jpg`
+            }\\public\\covers\\${data.common.title}.jpg`
           );
         if (data.common.picture && !musics.has(data.common.title ?? 'TITLE')) {
             musics.set(data.common.title ?? 'TITLE', {
@@ -35,6 +35,6 @@ async function getFiles() {
     return files;
 }
 
-async function getMusics() {
+export async function getMusics() {
     return await parseFiles(await getFiles());
 }

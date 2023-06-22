@@ -43,9 +43,15 @@ let songs = [
     },
 ];
 
-function loadTrack(songIndex){
+function loadTrack(songIndex){         //make sure you find the best index
     clearInterval(updateTimer);
-    
+    resetValue();                 //declare this func
+    curr_music.src = upcomiSongs[songIndex].path;
+    curr_music.load();
+
+    track_name.textContent = upcomiSongs[songIndex].name;
+    track_artist.textContent = upcomiSongs[songIndex].artist;
+    track_art = upcomiSongs[songIndex].cover;
 }
 var track_library = [];
 

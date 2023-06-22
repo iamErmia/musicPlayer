@@ -43,17 +43,48 @@ let songs = [
     },
 ];
 
-function loadTrack(songIndex){         //make sure you find the best index
+function loadTrack(songIndex){                     //make sure you find the best index via nextTrack and prevTrack functions
     clearInterval(updateTimer);
-    resetValue();                 //declare this func
+    resetValue();                                  
     curr_music.src = upcomiSongs[songIndex].path;
     curr_music.load();
 
     track_name.textContent = upcomiSongs[songIndex].name;
     track_artist.textContent = upcomiSongs[songIndex].artist;
     track_art = upcomiSongs[songIndex].cover;
+
+    updateTimer = setInterval(seekUpdate, 1000);          
+    curr_music.addEventListener("ended", nextTrack);      //declare this function
 }
-var track_library = [];
+
+function resetValue(){
+    curr_time = "00:00";
+    total_duration = "00:00";
+    seek_slider.value = 0;
+}
+
+function seekUpdate(){
+    let seekposition = 0;
+
+    if(!isNaN(curr_music.duration)){
+        seekposition = curr_music.currentTime * (100/curr_music.duration);
+        seek_slider.value = seekposition;
+
+        let currentMin = Math.floor(curr_music.currentTime / 60);
+        let currentSec = Math.floor(curr_music.currentTime - 60 * currentMin);
+        let totalMin = Math.floor(curr_music.duration / 60);
+        let totalSec = Math.floor(curr_music.duration - 60 * totalMin);
+
+        if(currentMin < 10){currentMin = "0" + currentMin};
+        if(currentSec < 10){currentSec = "0" + currentSec};
+        if(totalMin < 10){totalMin = "0" + totalMin};
+        if(totalSec < 10){totalSec = "0" + totalSec};
+
+        curr_time.textContent = currentMin + ":" + currentSec;
+        total_duration.textContent = totalMin + ":" + totalSec;
+    }
+}
+let track_library = [];
 
 function getMusics() {
     fetch('http://localhost:3000/songs').then((res) => res.json()).then((allMusics) => {
@@ -70,14 +101,19 @@ function getMusics() {
     })
 }
 
-getMusics();
+//getMusics();
 
-var upcomiSongs = [];//a que for saving the upcomig songs
-var front = 0;//the first elemnt of the afformentioned que
-var rear = 0;//the last element of the afformentioned que
+let upcomiSongs = [];//a que for saving the upcomig songs
+let front = 0;//the first elemnt of the afformentioned que
+let rear = 0;//the last element of the afformentioned que
 
 function firstAddToQue(){
     upcomiSongs = upcomiSongs.concat(track_library);//adding the loaded songs to the que
     rear = (track_library.length) - 1;
 }
 
+(() =>{
+    getMusics();//loading files
+    firstAddToQue();
+    let indxOfSong = findIndex();              //declare this function
+})();

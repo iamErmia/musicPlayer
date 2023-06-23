@@ -123,7 +123,7 @@ function getMusics() {
             div.appendChild(document.createTextNode(value.title));
             parent.appendChild(div);
             musicLibrary.appendChild(parent);
-            track_library.push(value.title);//adding tracks to an array
+            track_library.push(value);//adding tracks to an array
         }
     })
 }
@@ -154,7 +154,3 @@ function firstAddToQue(){
     next_btn.addEventListener("click", nextTrack);
     prev_btn.addEventListener("click",prevTrack);
 })();
-
-setInterval(() =>{
-    console.log(track_library);
-}, 500);

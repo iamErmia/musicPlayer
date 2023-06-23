@@ -22,20 +22,8 @@ align items in a vertical direction */
 	padding: 12px;
 	text-decoration: none;
 }
-
-.vertical-menu div {
-	display: flex;
-	image-resolution: 12px;
-	
-}
-
-.vertical-menu-div img {
-	flex: 1;
-	object-fit: contain;
-	height: 100%;
-}
   
-.vertical-menu a:hover {
+.vertical-menu-div:hover {
 	background-color: #ccc;
 }
   
@@ -107,7 +95,7 @@ align items in a vertical direction */
 	top: 50px;
 }
 
-.recentlyPlayed {
+.recentlyPlayed-div {
 	width: 200px;
 }
 

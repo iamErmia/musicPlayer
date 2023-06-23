@@ -91,10 +91,12 @@ function seekUpdate(){
 let recent = [];
 function addToRecent(){
     recent.push(curr_music.title);
-    const div = document.createElement('div');
-    div.className = 'recentlyPlayed-div';
-    div.appendChild(document.createTextNode(curr_music.title));
-    recentlyPlayed.appendChild(div);
+    const parent2 = document.createElement('div');
+    const div2 = document.createElement('div');
+    parent2.className = 'recentlyPlayed-div';
+    div2.appendChild(document.createTextNode(curr_music.title));
+    parent2.appendChild(div2);
+    recentlyPlayed.appendChild(parent2);
 }
 
 function nextTrack(){

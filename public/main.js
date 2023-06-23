@@ -139,9 +139,9 @@ let rear = 0;//the last element of the afformentioned que
 
 function firstAddToQue(){
     for(let i = 0; i < track_library.length; i++){
-        upcomiSongs.push(track_library[i]);
         if(upcomiSongs.includes(track_library[i]))
             continue;
+        upcomiSongs.push(track_library[i]);
     }
     /*upcomiSongs = upcomiSongs.concat(track_library);//adding the loaded songs to the que
     rear = (track_library.length);*/

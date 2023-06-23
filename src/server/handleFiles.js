@@ -19,7 +19,6 @@ async function parseFiles(files) {
                 artist: data.common.artist ?? 'ARTIST',
                 album: data.common.album ?? 'ALBUM',
                 genre: data.common.genre ? data.common.genre : undefined,
-                direction: data.common.path ? data.common.path : undefined,
                 duration: data.format.duration
             })
             fs.writeFileSync(imagePath, data.common.picture[0].data);

@@ -23,10 +23,10 @@ let updateTimer;
 
 let curr_music = document.createElement('audio');
 
-function loadTrack(songIndex){                     //make sure you find the best index via nextTrack and prevTrack functions
+function loadTrack(songIndex){
     clearInterval(updateTimer);
     resetValue();                                  
-    curr_music.src = upcomiSongs[songIndex].direction;
+    curr_music.src = upcomiSongs[songIndex];
     curr_music.load();
 
     track_name.textContent = upcomiSongs[songIndex].title;
@@ -138,8 +138,13 @@ let front = 0;//the first elemnt of the afformentioned que
 let rear = 0;//the last element of the afformentioned que
 
 function firstAddToQue(){
-    upcomiSongs = upcomiSongs.concat(track_library);//adding the loaded songs to the que
-    rear = (track_library.length);
+    for(let i = 0; i < track_library.length; i++){
+        upcomiSongs.push(track_library[i]);
+        if(upcomiSongs.includes(track_library[i]))
+            continue;
+    }
+    /*upcomiSongs = upcomiSongs.concat(track_library);//adding the loaded songs to the que
+    rear = (track_library.length);*/
 
     for(let i = 0; i < upcomiSongs.length; i++){
         const parent3 = document.createElement('div');

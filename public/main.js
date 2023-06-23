@@ -57,7 +57,7 @@ function loadTrack(songIndex){                     //make sure you find the best
     updateTimer = setInterval(seekUpdate, 1000);
 
     curr_music.addEventListener("ended", addToRecent);      //declare this function
-    curr_music.addEventListener("ended", nextTrack);      //declare this function
+    curr_music.addEventListener("ended", nextTrack);
 }
 
 function resetValue(){
@@ -93,7 +93,7 @@ function addToRecent(){
     recent.push(curr_music.title);
     const parent2 = document.createElement('div');
     const div2 = document.createElement('div');
-    parent2.className = 'recentlyPlayed-div';
+    parent2.className = 'recentlyPlayed';
     div2.appendChild(document.createTextNode(curr_music.title));
     parent2.appendChild(div2);
     recentlyPlayed.appendChild(parent2);
@@ -118,17 +118,20 @@ function prevTrack(){
     playTrack();
 }
 
-function playTrack(){
-    curr_music.play();
-    isPlaying = true;
-    playpause_btn.innerHTML = '<i class="fa fa-pause-circle fa-5x"></i>';
+function playPauseTrack(){
+    if(isPlaying){
+        curr_music.pause();
+        isPlaying = false;
+        playpause_btn.innerHTML = '<i class="fa fa-play-circle fa-5x"></i>';
+    }
+
+    else{
+        curr_music.play();
+        isPlaying = true;
+        playpause_btn.innerHTML = '<i class="fa fa-pause-circle fa-5x"></i>';
+    }
 }
 
-function pauseTrack(){
-    curr_music.pause();
-    isPlaying = false;
-    playpause_btn.innerHTML = '<i class="fa fa-play-circle fa-5x"></i>';
-}
 let track_library = [];
 
 function getMusics() {
@@ -146,8 +149,6 @@ function getMusics() {
     })
 }
 
-//getMusics();
-
 let upcomiSongs = [];//a que for saving the upcomig songs
 let front = 0;//the first elemnt of the afformentioned que
 let rear = 0;//the last element of the afformentioned que
@@ -161,6 +162,7 @@ function firstAddToQue(){
     getMusics();//loading files
     firstAddToQue();
     let indxOfSong = findIndex();              //declare this function   **if required at all**
+    playpause_btn.addEventListener("click", playPauseTrack);
     next_btn.addEventListener("click", nextTrack);
-    prev_btn.addEventListener("click",)
+    prev_btn.addEventListener("click",prevTrack);
 })();

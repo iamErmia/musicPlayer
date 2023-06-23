@@ -95,11 +95,11 @@ align items in a vertical direction */
 	top: 50px;
 }
 
-.recentlyPlayed-div {
+.recentlyPlayed {
 	width: 200px;
 }
 
-.recentlyPlayed-div {
+.recentlyPlayed a{
 	background-color: #f2f2f2;
 	color: black;
 	display: flex;
@@ -115,12 +115,13 @@ align items in a vertical direction */
 .recentlyPlayed a.active{
 	background-color: #04AA6D;
 	color: white;
+	text-decoration: none;
 }
 
 .recentlyPlayed {
 	position: absolute;
 	left: 270px;
-	top: 300px;
+	top: 500px;
 }
 
 .search input[type=text]{

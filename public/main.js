@@ -26,10 +26,10 @@ let curr_music = document.createElement('audio');
 function loadTrack(songIndex){                     //make sure you find the best index via nextTrack and prevTrack functions
     clearInterval(updateTimer);
     resetValue();                                  
-    curr_music.src = upcomiSongs[songIndex];
+    curr_music.src = upcomiSongs[songIndex].direction;
     curr_music.load();
 
-    track_name.textContent = upcomiSongs[songIndex].name;
+    track_name.textContent = upcomiSongs[songIndex].title;
     track_artist.textContent = upcomiSongs[songIndex].artist;
     track_art = upcomiSongs[songIndex].cover;
 
@@ -124,6 +124,11 @@ function getMusics() {
             parent.appendChild(div);
             musicLibrary.appendChild(parent);
             track_library.push(value);//adding tracks to an array
+            firstAddToQue();
+            loadTrack(songIndex);
+            playpause_btn.addEventListener("click", playPauseTrack);
+            next_btn.addEventListener("click", nextTrack);
+            prev_btn.addEventListener("click",prevTrack);
         }
     })
 }
@@ -137,10 +142,10 @@ function firstAddToQue(){
     rear = (track_library.length);
 
     for(let i = 0; i < upcomiSongs.length; i++){
-        const parent3 = document.createElement("div");
-        const div3 = document.createElement("div");
-        parent3.className = 'nextSongs';
-        div3.appendChild(createTextNode(upcomiSongs[i].title + " - " + upcomiSongs[i].artist));
+        const parent3 = document.createElement('div');
+        const div3 = document.createElement('div');
+        parent3.className = 'nextSongs-div';
+        div3.appendChild(document.createTextNode(upcomiSongs[i].title + " - " + upcomiSongs[i].artist));
         parent3.appendChild(div3);
         nextSongs.appendChild(parent3);
     }
@@ -148,9 +153,5 @@ function firstAddToQue(){
 
 (() =>{
     getMusics();//loading files
-    firstAddToQue();
-    loadTrack(songIndex);
-    playpause_btn.addEventListener("click", playPauseTrack);
-    next_btn.addEventListener("click", nextTrack);
-    prev_btn.addEventListener("click",prevTrack);
+    
 })();

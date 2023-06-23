@@ -5,7 +5,7 @@ let track_name = document.querySelector(".track-name");
 let track_artist = document.querySelector(".track-artist");
 let musicLibrary = document.querySelector(".vertical-menu");
 let recentlyPlayed = document.querySelector(".recentlyPlayed");
-
+let nextSongs = document.querySelector(".nextSongs");
  
 let playpause_btn = document.querySelector(".playpause-track");
 let next_btn = document.querySelector(".next-track");
@@ -23,31 +23,10 @@ let updateTimer;
 
 let curr_music = document.createElement('audio');
 
-let songs = [
-    {
-        name: "Daydream",
-        artist: "Mark Eliyahu",
-        cover: "https://songsara.net/wp-content/uploads/2022/03/Mark-Eliyahu-About-Love.jpg",
-        path: "music/Daydream.mp3"
-    },
-    {
-        name: "Sunshine",
-        artist: "Mark Eliyahu",
-        cover: "https://songsara.net/wp-content/uploads/2022/03/Mark-Eliyahu-About-Love.jpg",
-        path: "music/Sunshine.mp3"
-    },
-    {
-        name: "Wind",
-        artist: "Mark Eliyahu",
-        cover: "https://songsara.net/wp-content/uploads/2022/03/Mark-Eliyahu-About-Love.jpg",
-        path: "music/Wind"
-    },
-];
-
 function loadTrack(songIndex){                     //make sure you find the best index via nextTrack and prevTrack functions
     clearInterval(updateTimer);
     resetValue();                                  
-    curr_music.src = upcomiSongs[songIndex].path;
+    curr_music.src = upcomiSongs[songIndex];
     curr_music.load();
 
     track_name.textContent = upcomiSongs[songIndex].name;
@@ -56,7 +35,7 @@ function loadTrack(songIndex){                     //make sure you find the best
 
     updateTimer = setInterval(seekUpdate, 1000);
 
-    curr_music.addEventListener("ended", addToRecent);      //declare this function
+    curr_music.addEventListener("ended", addToRecent);
     curr_music.addEventListener("ended", nextTrack);
 }
 
@@ -156,13 +135,26 @@ let rear = 0;//the last element of the afformentioned que
 function firstAddToQue(){
     upcomiSongs = upcomiSongs.concat(track_library);//adding the loaded songs to the que
     rear = (track_library.length);
+
+    for(let i = 0; i < upcomiSongs.length; i++){
+        const parent3 = document.createElement("div");
+        const div3 = document.createElement("div");
+        parent3.className = 'nextSongs';
+        div3.appendChild(createTextNode(upcomiSongs[i].title + " - " + upcomiSongs[i].artist));
+        parent3.appendChild(div3);
+        nextSongs.appendChild(parent3);
+    }
 }
 
 (() =>{
     getMusics();//loading files
     firstAddToQue();
-    let indxOfSong = findIndex();              //declare this function   **if required at all**
+    loadTrack(songIndex);
     playpause_btn.addEventListener("click", playPauseTrack);
     next_btn.addEventListener("click", nextTrack);
     prev_btn.addEventListener("click",prevTrack);
 })();
+
+setInterval(() =>{
+    console.log(track_library);
+}, 500);

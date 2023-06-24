@@ -29,7 +29,7 @@ async function parseFiles(files) {
 }
 
 async function getFiles() {
-    const files = await glob('music/*.mp3', {
+    const files = await glob('public/music/*.mp3', {
         ignore: 'node_modules/**'
     });
     return files;

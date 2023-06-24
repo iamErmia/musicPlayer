@@ -25,8 +25,9 @@ let curr_music = document.createElement('audio');
 
 function loadTrack(songIndex){
     clearInterval(updateTimer);
-    resetValue();                                  
-    curr_music.src = upcomiSongs[songIndex];
+    resetValue();
+
+    curr_music.src = `music/${upcomiSongs[songIndex].title}.mp3`;
     curr_music.load();
 
     track_name.textContent = upcomiSongs[songIndex].title;
@@ -97,6 +98,12 @@ function prevTrack(){
     playTrack();
 }
 
+function playTrack(){
+    curr_music.play();
+    isPlaying = true;
+    playpause_btn.innerHTML = '<i class="fa fa-pause-circle fa-5x"></i>';
+}
+
 function playPauseTrack(){
     if(isPlaying){
         curr_music.pause();
@@ -126,9 +133,10 @@ function getMusics() {
             track_library.push(value);//adding tracks to an array
             firstAddToQue();
             loadTrack(songIndex);
-            playpause_btn.addEventListener("click", playPauseTrack);
-            next_btn.addEventListener("click", nextTrack);
-            prev_btn.addEventListener("click",prevTrack);
+            curr_music.src = upcomiSongs[songIndex].path;
+            //playpause_btn.addEventListener("click", playPauseTrack);
+            //next_btn.addEventListener("click", nextTrack);
+           // prev_btn.addEventListener("click",prevTrack);
         }
     })
 }
@@ -137,24 +145,28 @@ let upcomiSongs = [];//a que for saving the upcomig songs
 let front = 0;//the first elemnt of the afformentioned que
 let rear = 0;//the last element of the afformentioned que
 
-function firstAddToQue(){
+function firstAddToQue(){//adding the loaded songs to the que
     for(let i = 0; i < track_library.length; i++){
         if(upcomiSongs.includes(track_library[i]))
             continue;
         upcomiSongs.push(track_library[i]);
     }
-    /*upcomiSongs = upcomiSongs.concat(track_library);//adding the loaded songs to the que
-    rear = (track_library.length);*/
+    //upcomiSongs = track_library;
+    rear = track_library.length;
 
     for(let i = 0; i < upcomiSongs.length; i++){
         const parent3 = document.createElement('div');
-        const div3 = document.createElement('div');
+       // const div3 = document.createElement('div');
         parent3.className = 'nextSongs-div';
-        div3.appendChild(document.createTextNode(upcomiSongs[i].title + " - " + upcomiSongs[i].artist));
-        parent3.appendChild(div3);
+        parent3.appendChild(document.createTextNode(upcomiSongs[i].title + " - " + upcomiSongs[i].artist));
+       // parent3.appendChild(div3);
         nextSongs.appendChild(parent3);
     }
 }
+  
+  function setVolume() {
+    curr_music.volume = volume_slider.value / 100;
+  }
 
 (() =>{
     getMusics();//loading files

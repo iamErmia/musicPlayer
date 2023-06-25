@@ -1,8 +1,11 @@
 function redirectToPage(){
     console.log("test")
     let a = document.getElementById("Username").value;
-    if( a == "fuck"){
+    let b = document.getElementById("password").value;
+    if( ((a == "Moein") || (a=="Ermia")) && b == "85856969" ){
         window.location.href = '/src/server/index.html';
+    }else{
+        alert("bitch!! insert the right Username and password.")
     }
 
 }

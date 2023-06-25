@@ -15,7 +15,8 @@ let seek_slider = document.querySelector(".seek_slider");
 let volume_slider = document.querySelector(".volume_slider");
 let curr_time = document.querySelector(".current-time");
 let total_duration = document.querySelector(".total-duration");
- 
+
+let search_bar = document.getElementById("search_text");
 
 let songIndex = 0;
 let isPlaying = false;
@@ -24,8 +25,9 @@ let updateTimer;
 let curr_music = document.createElement('audio');
 
 function loadTrack(songIndex){
-    clearInterval(updateTimer);
-    resetValue();
+    //resetValue();
+    //clearInterval(updateTimer);
+    
 
     curr_music.src = `music/${upcomiSongs[songIndex].title}.mp3`;
     curr_music.load();
@@ -36,7 +38,7 @@ function loadTrack(songIndex){
 
     updateTimer = setInterval(seekUpdate, 1000);
 
-    curr_music.addEventListener("ended", addToRecent());
+    //curr_music.addEventListener("ended", addToRecent());
     curr_music.addEventListener("ended", nextTrack);
 }
 
@@ -68,15 +70,24 @@ function seekUpdate(){
     }
 }
 
+function seekTo() {
+    let seekto = curr_music.duration * (seek_slider.value / 100);
+    curr_music.currentTime = seekto;
+  }
+
 let recent = [];
+let temp = [];
+
 function addToRecent(){
     recent.push(curr_music);
+
     const parent2 = document.createElement('div');
     //const div2 = document.createElement('div');
-    parent2.className = 'recentlyPlayed a';
-    parent2.appendChild(document.createTextNode(curr_music.title));
+    parent2.className = 'recentlyPlayed-div';
+    parent2.appendChild(document.createTextNode(upcomiSongs[songIndex].title + " - " + upcomiSongs[songIndex].artist));
     //parent2.appendChild(div2);
     recentlyPlayed.appendChild(parent2);
+
 }
 
 function nextTrack(){
@@ -90,6 +101,7 @@ function nextTrack(){
 }
 
 function prevTrack(){
+    addToRecent();
     if(songIndex == 0)
         songIndex = rear - 1;
     else
@@ -119,6 +131,14 @@ function playPauseTrack(){
     }
 }
 
+let strapp = [];
+function search(){
+        strapp.push(String(track_library[i].title));
+        console.log(strapp);
+        let matchingString = strapp.filter(Element => Element.includes(search_bar.value));
+        console.log(matchingString);
+}
+
 let track_library = [];
 
 function getMusics() {
@@ -134,13 +154,12 @@ function getMusics() {
             track_library.push(value);//adding tracks to an array
             firstAddToQue();
             loadTrack(songIndex);
-            curr_music.src = upcomiSongs[songIndex].path;
-            //playpause_btn.addEventListener("click", playPauseTrack);
-            //next_btn.addEventListener("click", nextTrack);
-           // prev_btn.addEventListener("click",prevTrack);
+            search_bar.addEventListener("click", search);
         }
     })
 }
+
+search_bar.addEventListener('change', search());
 
 let upcomiSongs = [];//a que for saving the upcomig songs
 let front = 0;//the first elemnt of the afformentioned que

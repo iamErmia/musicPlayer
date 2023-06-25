@@ -12,8 +12,14 @@ const port = 3000
 app.use(express.static('public', {root: __dirname}))
 
 app.get('/', (req, res) => {
+  res.sendFile('login.html', {root: __dirname})
+})
+
+app.get('/player', (req, res) => {
   res.sendFile('index.html', {root: __dirname})
 })
+
+
 
 app.get('/songs', async (_req, res) => {
   return res.json(Object.fromEntries(await getMusics()));

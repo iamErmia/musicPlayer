@@ -134,7 +134,7 @@ function playPauseTrack(){
 let strapp = [];
 function search(){
         strapp.push(String(track_library.title));
-        console.log(strapp);
+        console.log(strapp.title);
         let matchingString = strapp.filter(Element => Element.includes(search_bar.value));
         console.log(matchingString);
 }

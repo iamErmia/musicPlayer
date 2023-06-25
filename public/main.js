@@ -36,7 +36,7 @@ function loadTrack(songIndex){
 
     updateTimer = setInterval(seekUpdate, 1000);
 
-    curr_music.addEventListener("ended", addToRecent);
+    curr_music.addEventListener("ended", addToRecent());
     curr_music.addEventListener("ended", nextTrack);
 }
 
@@ -70,16 +70,17 @@ function seekUpdate(){
 
 let recent = [];
 function addToRecent(){
-    recent.push(curr_music.title);
+    recent.push(curr_music);
     const parent2 = document.createElement('div');
-    const div2 = document.createElement('div');
-    parent2.className = 'recentlyPlayed';
-    div2.appendChild(document.createTextNode(curr_music.title));
-    parent2.appendChild(div2);
+    //const div2 = document.createElement('div');
+    parent2.className = 'recentlyPlayed a';
+    parent2.appendChild(document.createTextNode(curr_music.title));
+    //parent2.appendChild(div2);
     recentlyPlayed.appendChild(parent2);
 }
 
 function nextTrack(){
+    addToRecent();
     if(songIndex != rear - 1)
         songIndex = songIndex + 1;
     else
